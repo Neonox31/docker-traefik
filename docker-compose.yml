@@ -1,11 +1,20 @@
 version: '2'
+networks:
+  weberhome_lan:
+    external: true
 services:
-  bind:
+  traefik:
     image: traefik
+    container_name: traefik
     restart: always
+    networks:
+      - weberhome_lan
     ports:
       - "8080:8080"
       - "80:80"
+      - "443:443"
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
       - /srv/docker/traefik/traefik.toml:/etc/traefik/traefik.toml
+      - /srv/docker/traefik/acme.json:/acme.json:rw
