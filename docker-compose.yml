@@ -1,0 +1,11 @@
+version: '2'
+services:
+  bind:
+    image: traefik
+    restart: always
+    ports:
+      - "8080:8080"
+      - "80:80"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /srv/docker/traefik/traefik.toml:/etc/traefik/traefik.toml
